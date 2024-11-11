@@ -1,0 +1,86 @@
+project:
+  type: book
+  output-dir: _book
+
+book:
+  title: "Modelos de Distribuição de Espécies no R"
+  reader-mode: true
+  
+  page-footer:
+    left: |
+      Modelos de Distribuição de Espécies no R foi escrito por Maurício H. Vancine.
+    right: |
+      Este livro foi feito com <a href="https://quarto.org/">Quarto</a>.
+  cover-image: cover.png
+  favicon: cover.png
+  site-url: https://mauriciovancine.github.io/book-sdm-r
+  repo-url: https://github.com/mauriciovancine/book-sdm-r
+  repo-branch: main
+  repo-actions: [edit, issue]
+  chapters:
+    - index.qmd
+    - intro.qmd
+  
+    - part: theory.qmd
+      chapters:
+        - cap01.qmd
+    
+    - part: data.qmd
+      chapters:
+       - cap02.qmd
+       - cap03.qmd
+    
+    - part: model.qmd
+      chapters:
+        - cap04.qmd
+        - cap05.qmd
+        - cap06.qmd
+        - cap07.qmd
+
+    - part: evaluation.qmd
+      chapters:
+       - cap08.qmd
+       - cap09.qmd
+       - cap10.qmd
+       
+    - part: ensemble.qmd
+      chapters:
+       - cap11.qmd
+       - cap12.qmd
+
+    - part: projection.qmd
+      chapters:
+        - cap13.qmd
+        - cap14.qmd
+    
+    - part: application.qmd
+      chapters:
+       - cap15.qmd
+       - cap16.qmd
+       - cap17.qmd
+       - cap18.qmd
+       - cap19.qmd
+       - cap20.qmd
+       - cap21.qmd
+       - cap22.qmd
+       - cap23.qmd
+
+bibliography: references.bib
+
+format:
+  html:
+    theme: 
+      - cosmo
+      - sdmr.scss
+    code-link: true
+    
+    author-meta: "Maurício H. Vancine"
+    callout-appearance: simple
+
+execute: 
+  warning: false 
+  message: false
+
+editor: source
+lang: pt
+
