@@ -1,1 +1,0 @@
-Sitemap: https://mauriciovancine.github.io/book-sdm-r/sitemap.xml
