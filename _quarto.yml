@@ -17,8 +17,6 @@ book:
   favicon: cover.png
   site-url: https://mauriciovancine.github.io/book-sdm-r
   repo-url: https://github.com/mauriciovancine/book-sdm-r
-  repo-branch: docs
-  repo-actions: [edit, issue]
   chapters:
     - index.qmd
     - intro.qmd
