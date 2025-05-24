@@ -4,6 +4,8 @@ project:
   
 lang: pt-BR
 
+source: .
+
 book:
   title: "Modelagem de Distribuição de Espécies no R"
   reader-mode: true
@@ -15,7 +17,6 @@ book:
       Este livro foi feito com [Quarto](https://quarto.org){target="_blank"}.
   cover-image: cover.png
   favicon: cover.png
-  site-url: https://mauriciovancine.github.io/book-sdm-r
   repo-url: https://github.com/mauriciovancine/book-sdm-r
   chapters:
     - index.qmd
