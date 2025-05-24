@@ -4,12 +4,9 @@ project:
   
 lang: pt-BR
 
-source: .
-
 book:
   title: "Modelagem de Distribuição de Espécies no R"
-  reader-mode: true
-  
+
   page-footer:
     left: |
       Modelagem de Distribuição de Espécies no R foi escrito por Maurício H. Vancine.
@@ -18,6 +15,7 @@ book:
   cover-image: cover.png
   favicon: cover.png
   repo-url: https://github.com/mauriciovancine/book-sdm-r
+
   chapters:
     - index.qmd
     - intro.qmd
