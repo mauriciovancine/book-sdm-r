@@ -20,36 +20,36 @@ book:
     - index.qmd
     - intro.qmd
   
-    - part: theory.qmd
+    - part: parte01.qmd
       chapters:
         - cap01.qmd
     
-    - part: data.qmd
+    - part: parte02.qmd
       chapters:
        - cap02.qmd
        - cap03.qmd
     
-    - part: model.qmd
+    - part: parte03.qmd
       chapters:
         - cap04.qmd
         - cap05.qmd
         - cap06.qmd
         - cap07.qmd
 
-    - part: evaluation.qmd
+    - part: parte04.qmd
       chapters:
        - cap08.qmd
        - cap09.qmd
        - cap10.qmd
        
-    - part: prediction.qmd
+    - part: parte05.qmd
       chapters:
        - cap11.qmd
        - cap12.qmd
        - cap13.qmd
        - cap14.qmd
     
-    - part: application.qmd
+    - part: parte06.qmd
       chapters:
        - cap15.qmd
        - cap16.qmd
@@ -60,6 +60,7 @@ book:
        - cap21.qmd
        - cap22.qmd
        - cap23.qmd
+       - cap24.qmd
 
 bibliography: references.bib
 
