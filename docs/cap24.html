@@ -1,14 +1,11 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="pt-BR" xml:lang="pt-BR"><head>
-
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.33">
-
+<meta name="generator" content="quarto-1.8.25">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-
 <meta name="author" content="Maurício H. Vancine">
-
-<title>24&nbsp; Ocenos – Modelagem de Distribuição de Espécies no R</title>
+<title>24&nbsp; Marinho – Modelagem de Distribuição de Espécies no R</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -21,8 +18,42 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
-
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="site_libs/quarto-nav/headroom.min.js"></script>
@@ -35,15 +66,15 @@ ul.task-list li input[type="checkbox"] {
 <link href="./cover.png" rel="icon" type="image/png">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-ea385d0e468b0dd5ea5bf0780b1290d9.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-6603547b790d67bf7d0dfd04a8922f39.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
-<script id="quarto-search-options" type="application/json">{
+<link href="site_libs/bootstrap/bootstrap-e450ad365fa50622b20c81012c2a5a0c.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
@@ -70,33 +101,26 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Procurar"
   }
 }</script>
-
-
 </head>
-
 <body class="nav-sidebar floating quarto-light">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
-  <nav class="quarto-secondary-nav">
-    <div class="container-fluid d-flex">
+  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./parte06.html">Parte VII: Aplicações</a></li><li class="breadcrumb-item"><a href="./cap24.html"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Ocenos</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./parte06.html">Parte VII: Aplicações</a></li><li class="breadcrumb-item"><a href="./cap24.html"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Marinho</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Procurar" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
-  </nav>
-</header>
-<!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
-    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="./index.html" class="sidebar-logo-link">
+      </a>
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Modelagem de Distribuição de Espécies no R</a> 
         <div class="sidebar-tools-main">
@@ -111,7 +135,7 @@ ul.task-list li input[type="checkbox"] {
         </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
-        <li class="sidebar-item">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Prefácio</span></a>
@@ -131,15 +155,15 @@ ul.task-list li input[type="checkbox"] {
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./cap01.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Teoria</span></span></a>
   </div>
 </li>
       </ul>
-  </li>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a href="./parte02.html" class="sidebar-item-text sidebar-link">
@@ -148,8 +172,8 @@ ul.task-list li input[type="checkbox"] {
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./cap02.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Ocorrências</span></span></a>
@@ -162,7 +186,7 @@ ul.task-list li input[type="checkbox"] {
   </div>
 </li>
       </ul>
-  </li>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a href="./parte03.html" class="sidebar-item-text sidebar-link">
@@ -171,8 +195,8 @@ ul.task-list li input[type="checkbox"] {
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./cap04.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Algoritmos</span></span></a>
@@ -197,7 +221,7 @@ ul.task-list li input[type="checkbox"] {
   </div>
 </li>
       </ul>
-  </li>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a href="./parte04.html" class="sidebar-item-text sidebar-link">
@@ -206,8 +230,8 @@ ul.task-list li input[type="checkbox"] {
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./cap08.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Partição dos dados (treino e teste)</span></span></a>
@@ -226,7 +250,7 @@ ul.task-list li input[type="checkbox"] {
   </div>
 </li>
       </ul>
-  </li>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a href="./parte05.html" class="sidebar-item-text sidebar-link">
@@ -235,8 +259,8 @@ ul.task-list li input[type="checkbox"] {
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./cap11.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Consenso dos modelos</span></span></a>
@@ -261,7 +285,7 @@ ul.task-list li input[type="checkbox"] {
   </div>
 </li>
       </ul>
-  </li>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a href="./parte06.html" class="sidebar-item-text sidebar-link">
@@ -270,8 +294,8 @@ ul.task-list li input[type="checkbox"] {
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./cap15.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Conservação</span></span></a>
@@ -328,25 +352,55 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./cap24.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Ocenos</span></span></a>
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Marinho</span></span></a>
   </div>
 </li>
       </ul>
-  </li>
+</li>
     </ul>
-    </div>
-</nav>
-<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+</div>
+</nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Índice</h2>
+   
+  <ul>
+<li><a href="#pr%C3%A9-requisitos" id="toc-pré-requisitos" class="nav-link active" data-scroll-target="#pr%C3%A9-requisitos"><span class="header-section-number">24.1</span> Pré-requisitos</a></li>
+  <li>
+<a href="#ocorr%C3%AAncias" id="toc-ocorrências" class="nav-link" data-scroll-target="#ocorr%C3%AAncias"><span class="header-section-number">24.2</span> Ocorrências</a>
+  <ul class="collapse">
+<li><a href="#acessar-dados-de-ocorr%C3%AAncias-marinhos" id="toc-acessar-dados-de-ocorrências-marinhos" class="nav-link" data-scroll-target="#acessar-dados-de-ocorr%C3%AAncias-marinhos"><span class="header-section-number">24.2.1</span> Acessar dados de ocorrências marinhos</a></li>
+  </ul>
+</li>
+  <li>
+<a href="#vari%C3%A1veis" id="toc-variáveis" class="nav-link" data-scroll-target="#vari%C3%A1veis"><span class="header-section-number">24.3</span> Variáveis</a>
+  <ul class="collapse">
+<li><a href="#acessar-dados-de-vari%C3%A1veis-marinhas" id="toc-acessar-dados-de-variáveis-marinhas" class="nav-link" data-scroll-target="#acessar-dados-de-vari%C3%A1veis-marinhas"><span class="header-section-number">24.3.1</span> Acessar dados de variáveis marinhas</a></li>
+  </ul>
+</li>
+  <li>
+<a href="#modelos" id="toc-modelos" class="nav-link" data-scroll-target="#modelos"><span class="header-section-number">24.4</span> Modelos</a>
+  <ul class="collapse">
+<li><a href="#ocorr%C3%AAncias-e-%C3%A1rea-de-calibra%C3%A7%C3%A3o" id="toc-ocorrências-e-área-de-calibração" class="nav-link" data-scroll-target="#ocorr%C3%AAncias-e-%C3%A1rea-de-calibra%C3%A7%C3%A3o"><span class="header-section-number">24.4.1</span> Ocorrências e área de calibração</a></li>
+  <li><a href="#vari%C3%A1veis-e-correla%C3%A7%C3%A3o" id="toc-variáveis-e-correlação" class="nav-link" data-scroll-target="#vari%C3%A1veis-e-correla%C3%A7%C3%A3o"><span class="header-section-number">24.4.2</span> Variáveis e correlação</a></li>
+  <li><a href="#filtro-ambiental-das-ocorr%C3%AAncias" id="toc-filtro-ambiental-das-ocorrências" class="nav-link" data-scroll-target="#filtro-ambiental-das-ocorr%C3%AAncias"><span class="header-section-number">24.4.3</span> Filtro ambiental das ocorrências</a></li>
+  <li><a href="#amostragem-das-pseudoaus%C3%AAncia-e-pontos-de-fundo" id="toc-amostragem-das-pseudoausência-e-pontos-de-fundo" class="nav-link" data-scroll-target="#amostragem-das-pseudoaus%C3%AAncia-e-pontos-de-fundo"><span class="header-section-number">24.4.4</span> Amostragem das pseudoausência e pontos de fundo</a></li>
+  <li><a href="#parti%C3%A7%C3%A3o-dos-dados" id="toc-partição-dos-dados" class="nav-link" data-scroll-target="#parti%C3%A7%C3%A3o-dos-dados"><span class="header-section-number">24.4.5</span> Partição dos dados</a></li>
+  <li><a href="#extra%C3%A7%C3%A3o-dos-dados-ambientais" id="toc-extração-dos-dados-ambientais" class="nav-link" data-scroll-target="#extra%C3%A7%C3%A3o-dos-dados-ambientais"><span class="header-section-number">24.4.6</span> Extração dos dados ambientais</a></li>
+  <li><a href="#ajuste-dos-modelos" id="toc-ajuste-dos-modelos" class="nav-link" data-scroll-target="#ajuste-dos-modelos"><span class="header-section-number">24.4.7</span> Ajuste dos modelos</a></li>
+  <li><a href="#avalia%C3%A7%C3%A3o-dos-modelos" id="toc-avaliação-dos-modelos" class="nav-link" data-scroll-target="#avalia%C3%A7%C3%A3o-dos-modelos"><span class="header-section-number">24.4.8</span> Avaliação dos modelos</a></li>
+  <li><a href="#respostas-e-contribui%C3%A7%C3%A3o-das-vari%C3%A1veis-dos-modelos" id="toc-respostas-e-contribuição-das-variáveis-dos-modelos" class="nav-link" data-scroll-target="#respostas-e-contribui%C3%A7%C3%A3o-das-vari%C3%A1veis-dos-modelos"><span class="header-section-number">24.4.9</span> Respostas e contribuição das variáveis dos modelos</a></li>
+  <li><a href="#consenso" id="toc-consenso" class="nav-link" data-scroll-target="#consenso"><span class="header-section-number">24.4.10</span> Consenso</a></li>
+  <li><a href="#predi%C3%A7%C3%A3o" id="toc-predição" class="nav-link" data-scroll-target="#predi%C3%A7%C3%A3o"><span class="header-section-number">24.4.11</span> Predição</a></li>
+  </ul>
+</li>
+  </ul></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
-
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./parte06.html">Parte VII: Aplicações</a></li><li class="breadcrumb-item"><a href="./cap24.html"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Ocenos</span></a></li></ol></nav>
-<div class="quarto-title">
-<h1 class="title"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Ocenos</span></h1>
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./parte06.html">Parte VII: Aplicações</a></li><li class="breadcrumb-item"><a href="./cap24.html"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Marinho</span></a></li></ol></nav><div class="quarto-title">
+<h1 class="title">
+<span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Marinho</span>
+</h1>
 </div>
 
 
@@ -360,14 +414,936 @@ ul.task-list li input[type="checkbox"] {
   
 
 
-</header>
+</header><section id="pré-requisitos" class="level2" data-number="24.1"><h2 data-number="24.1" class="anchored" data-anchor-id="pré-requisitos">
+<span class="header-section-number">24.1</span> Pré-requisitos</h2>
+<p>Instalar e carregar estes pacotes.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># install packages</span></span>
+<span><span class="co"># install.packages(c("tidyverse", "spocc", "sf", "terra", "tmap", "flexsdm"))</span></span>
+<span><span class="co"># devtools::install_github("bio-oracle/biooracler")</span></span>
+<span></span>
+<span><span class="co"># load packages</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://docs.ropensci.org/spocc">spocc</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://r-spatial.github.io/sf/">sf</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://rspatial.org/">terra</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://bio-oracle.org/;">biooracler</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/r-tmap/tmap">tmap</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://sjevelazco.github.io/flexsdm">flexsdm</a></span><span class="op">)</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Definir os diretórios.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># directory</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/files2.html">dir.create</a></span><span class="op">(</span><span class="st">"01_data_marinho"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/files2.html">dir.create</a></span><span class="op">(</span><span class="st">"01_data_marinho/01_occurrences"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/files2.html">dir.create</a></span><span class="op">(</span><span class="st">"01_data_marinho/02_variables"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/files2.html">dir.create</a></span><span class="op">(</span><span class="st">"02_output_marinho"</span><span class="op">)</span></span>
+<span><span class="va">sp_dir</span> <span class="op">&lt;-</span> <span class="st">"02_output_marinho/"</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section><section id="ocorrências" class="level2" data-number="24.2"><h2 data-number="24.2" class="anchored" data-anchor-id="ocorrências">
+<span class="header-section-number">24.2</span> Ocorrências</h2>
+<section id="acessar-dados-de-ocorrências-marinhos" class="level3" data-number="24.2.1"><h3 data-number="24.2.1" class="anchored" data-anchor-id="acessar-dados-de-ocorrências-marinhos">
+<span class="header-section-number">24.2.1</span> Acessar dados de ocorrências marinhos</h3>
+<p>Vamos definir uma área para buscas as ocorrências marinhas.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># brazil</span></span>
+<span><span class="va">brazil</span> <span class="op">&lt;-</span> <span class="va">World</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>    <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">iso_a3</span> <span class="op">==</span> <span class="st">"BRA"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">brazil_buffer</span> <span class="op">&lt;-</span> <span class="va">brazil</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>    <span class="fu">terra</span><span class="fu">::</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/vect.html">vect</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>    <span class="fu">terra</span><span class="fu">::</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/buffer.html">buffer</a></span><span class="op">(</span><span class="fl">500000</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>    <span class="fu">sf</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_as_sf.html">st_as_sf</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>    <span class="fu">sf</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/geos_binary_ops.html">st_difference</a></span><span class="op">(</span><span class="fu">sf</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/geos_combine.html">st_union</a></span><span class="op">(</span><span class="va">World</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>    <span class="fu">terra</span><span class="fu">::</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/vect.html">vect</a></span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://r-tmap.github.io/tmap/reference/tm_shape.html">tm_shape</a></span><span class="op">(</span><span class="va">brazil_buffer</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://r-tmap.github.io/tmap/reference/tm_polygons.html">tm_borders</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://r-tmap.github.io/tmap/reference/tm_shape.html">tm_shape</a></span><span class="op">(</span><span class="va">brazil</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://r-tmap.github.io/tmap/reference/tm_polygons.html">tm_fill</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://r-tmap.github.io/tmap/reference/tm_grid.html">tm_graticules</a></span><span class="op">(</span>lines <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="cap24_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Download das ocorrências da tartaruga-marinha <em>Eretmochelys imbricata</em>.</p>
+<p>Vamos fazer o download destas bases de dados:</p>
+<ul>
+<li>
+<a href="">gbif</a>: <a href="https://www.gbif.org">Global Biodiversity Information Facility (GBIF)</a>
+</li>
+<li>
+<a href="">vertnet</a>: <a href="https://vertnet.org">VertNet - Dados de vertebrados de coleções científicas</a>
+</li>
+<li>
+<a href="">idigbio</a>: <a href="https://www.idigbio.org">iDigBio - Portal de digitalização de coleções biológicas dos EUA</a>
+</li>
+<li>
+<a href="">obis</a>: <a href="https://obis.org">Ocean Biodiversity Information System (OBIS)</a>
+</li>
+<li>
+<a href="">ala</a>: <a href="https://www.ala.org.au">Atlas of Living Australia (ALA)</a>
+</li>
+</ul>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># download occurrences</span></span>
+<span><span class="va">occ</span> <span class="op">&lt;-</span> <span class="fu">spocc</span><span class="fu">::</span><span class="fu"><a href="https://docs.ropensci.org/spocc/reference/occ.html">occ</a></span><span class="op">(</span></span>
+<span>    query <span class="op">=</span> <span class="st">"Eretmochelys imbricata"</span>,</span>
+<span>    from <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"gbif"</span>, <span class="st">"vertnet"</span>, <span class="st">"idigbio"</span>, <span class="st">"obis"</span>, <span class="st">"ala"</span><span class="op">)</span>,</span>
+<span>    limit <span class="op">=</span> <span class="fl">100</span>,</span>
+<span>    geometry <span class="op">=</span> <span class="fu">sf</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_bbox.html">st_bbox</a></span><span class="op">(</span><span class="va">brazil_buffer</span><span class="op">)</span>,</span>
+<span>    has_coords <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span>
+<span><span class="va">occ</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Searched: gbif, vertnet, idigbio, obis, ala
+Occurrences - Found: 9,699, Returned: 300
+Search type: Scientific
+  gbif: Eretmochelys imbricata (100)
+  obis: Eretmochelys imbricata (100)
+  ala: Eretmochelys imbricata (100)</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># data</span></span>
+<span><span class="va">occ_data</span> <span class="op">&lt;-</span> <span class="fu">spocc</span><span class="fu">::</span><span class="fu"><a href="https://docs.ropensci.org/spocc/reference/occ2df.html">occ2df</a></span><span class="op">(</span><span class="va">occ</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>    <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/drop_na.html">drop_na</a></span><span class="op">(</span><span class="va">longitude</span>, <span class="va">latitude</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rspatial.github.io/terra/reference/headtail.html">head</a></span><span class="op">(</span><span class="va">occ_data</span><span class="op">)</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 6
+  name                                 longitude latitude prov  date       key  
+  &lt;chr&gt;                                    &lt;dbl&gt;    &lt;dbl&gt; &lt;chr&gt; &lt;date&gt;     &lt;chr&gt;
+1 Eretmochelys imbricata (Linnaeus, 1…     -38.1   -12.6  gbif  2026-01-14 6130…
+2 Eretmochelys imbricata (Linnaeus, 1…     -35.0    -8.26 gbif  2026-01-06 6131…
+3 Eretmochelys imbricata (Linnaeus, 1…     -38.6    -3.87 gbif  2026-01-31 6133…
+4 Eretmochelys imbricata (Linnaeus, 1…     -52.5     5.39 gbif  2025-01-05 5037…
+5 Eretmochelys imbricata (Linnaeus, 1…     -34.9    -8.47 gbif  2025-02-20 5077…
+6 Eretmochelys imbricata (Linnaeus, 1…     -34.8    -7.98 gbif  2025-02-12 5077…</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># vector</span></span>
+<span><span class="va">occ_data_sf</span> <span class="op">&lt;-</span> <span class="va">occ_data</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>    <span class="fu">sf</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_as_sf.html">st_as_sf</a></span><span class="op">(</span>coords <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"longitude"</span>, <span class="st">"latitude"</span><span class="op">)</span>, crs <span class="op">=</span> <span class="fl">4326</span><span class="op">)</span></span>
+<span><span class="va">occ_data_sf</span> <span class="op">&lt;-</span> <span class="va">occ_data_sf</span><span class="op">[</span><span class="fu">sf</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_as_sf.html">st_as_sf</a></span><span class="op">(</span><span class="va">brazil_buffer</span><span class="op">)</span>, <span class="op">]</span></span>
+<span></span>
+<span><span class="co"># filter </span></span>
+<span><span class="va">occ_data</span> <span class="op">&lt;-</span> <span class="va">occ_data_sf</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>    <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span></span>
+<span>        x <span class="op">=</span> <span class="fu">sf</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_coordinates.html">st_coordinates</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span><span class="op">[</span>, <span class="fl">1</span><span class="op">]</span>,</span>
+<span>        y <span class="op">=</span> <span class="fu">sf</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_coordinates.html">st_coordinates</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span><span class="op">[</span>, <span class="fl">2</span><span class="op">]</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>    <span class="fu">sf</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_geometry.html">st_drop_geometry</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rspatial.github.io/terra/reference/headtail.html">head</a></span><span class="op">(</span><span class="va">occ_data</span><span class="op">)</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 6
+  name                                    prov  date       key          x      y
+  &lt;chr&gt;                                   &lt;chr&gt; &lt;date&gt;     &lt;chr&gt;    &lt;dbl&gt;  &lt;dbl&gt;
+1 Eretmochelys imbricata (Linnaeus, 1766) gbif  2026-01-14 6130658… -38.1 -12.6 
+2 Eretmochelys imbricata (Linnaeus, 1766) gbif  2025-01-05 5037273… -52.5   5.39
+3 Eretmochelys imbricata (Linnaeus, 1766) gbif  2025-02-20 5077055… -34.9  -8.47
+4 Eretmochelys imbricata (Linnaeus, 1766) gbif  2025-02-12 5077089… -34.8  -7.98
+5 Eretmochelys imbricata (Linnaeus, 1766) gbif  2025-02-16 5760913… -34.8  -7.80
+6 Eretmochelys imbricata (Linnaeus, 1766) gbif  2025-03-21 5108083… -34.9  -7.98</code></pre>
+</div>
+</div>
+<p>Vamos fazer um mapa para conferir os pontos.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># map</span></span>
+<span><span class="fu"><a href="https://r-tmap.github.io/tmap/reference/tm_shape.html">tm_shape</a></span><span class="op">(</span><span class="va">brazil_buffer</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://r-tmap.github.io/tmap/reference/tm_polygons.html">tm_borders</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://r-tmap.github.io/tmap/reference/tm_shape.html">tm_shape</a></span><span class="op">(</span><span class="va">brazil</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://r-tmap.github.io/tmap/reference/tm_polygons.html">tm_fill</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://r-tmap.github.io/tmap/reference/tm_shape.html">tm_shape</a></span><span class="op">(</span><span class="va">occ_data_sf</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://r-tmap.github.io/tmap/reference/tm_symbols.html">tm_bubbles</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">.3</span>, fill <span class="op">=</span> <span class="st">"black"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://r-tmap.github.io/tmap/reference/tm_grid.html">tm_graticules</a></span><span class="op">(</span>lines <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="cap24_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section></section><section id="variáveis" class="level2" data-number="24.3"><h2 data-number="24.3" class="anchored" data-anchor-id="variáveis">
+<span class="header-section-number">24.3</span> Variáveis</h2>
+<section id="acessar-dados-de-variáveis-marinhas" class="level3" data-number="24.3.1"><h3 data-number="24.3.1" class="anchored" data-anchor-id="acessar-dados-de-variáveis-marinhas">
+<span class="header-section-number">24.3.1</span> Acessar dados de variáveis marinhas</h3>
+<p>Vamos definir uma área para downlod das variáveis marinhas.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># brazil</span></span>
+<span><span class="va">brazil</span> <span class="op">&lt;-</span> <span class="va">World</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>    <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">iso_a3</span> <span class="op">==</span> <span class="st">"BRA"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">brazil_buffer</span> <span class="op">&lt;-</span> <span class="va">brazil</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>    <span class="fu">terra</span><span class="fu">::</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/vect.html">vect</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>    <span class="fu">terra</span><span class="fu">::</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/buffer.html">buffer</a></span><span class="op">(</span><span class="fl">500000</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>    <span class="fu">sf</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_as_sf.html">st_as_sf</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>    <span class="fu">sf</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/geos_binary_ops.html">st_difference</a></span><span class="op">(</span><span class="fu">sf</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/geos_combine.html">st_union</a></span><span class="op">(</span><span class="va">World</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>    <span class="fu">terra</span><span class="fu">::</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/vect.html">vect</a></span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://r-tmap.github.io/tmap/reference/tm_shape.html">tm_shape</a></span><span class="op">(</span><span class="va">brazil_buffer</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://r-tmap.github.io/tmap/reference/tm_polygons.html">tm_polygons</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://r-tmap.github.io/tmap/reference/tm_grid.html">tm_graticules</a></span><span class="op">(</span>lines <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="cap24_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Download das variáveis para modelar a tartaruga-marinha <em>Eretmochelys imbricata</em>.</p>
+<p>Vamos fazer o download do <a href="https://www.bio-oracle.org/index.php">BIO-ORACLE</a>. Eles têm essas variáveis:</p>
+<ul>
+<li>chl: Chlorophyll</li>
+<li>clt: Total Cloud Fraction</li>
+<li>dfe: Dissolved Iron</li>
+<li>mlotst: Mixed Layer Depth</li>
+<li>no3: Nitrate</li>
+<li>o2: Dissolved Molecular Oxygen</li>
+<li>ph: pH</li>
+<li>phyc: Total Phytoplankton</li>
+<li>phyc: Phytoplankton</li>
+<li>po4: Phosphate</li>
+<li>si: Silicate</li>
+<li>siconc: Sea Ice Cover</li>
+<li>sithick: Sea Ice Thickness</li>
+<li>so: Salinity</li>
+<li>sws: Sea Water Speed</li>
+<li>tas: Air Temperature</li>
+<li>terrain: Terrain</li>
+<li>thetao: Ocean Temperature</li>
+</ul>
+<p>Vamos escolher algumas variáveis e listar elas.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">var_names</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"thetao"</span>, <span class="st">"chl"</span>, <span class="st">"terrain"</span><span class="op">)</span></span>
+<span><span class="va">var_names</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "thetao"  "chl"     "terrain"</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># list variables</span></span>
+<span><span class="va">biooracle_var</span> <span class="op">&lt;-</span> <span class="fu">biooracler</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/biooracler/man/list_layers.html">list_layers</a></span><span class="op">(</span><span class="op">)</span> </span>
+<span><span class="fu"><a href="https://rspatial.github.io/terra/reference/headtail.html">head</a></span><span class="op">(</span><span class="va">biooracle_var</span><span class="op">)</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 3
+  dataset_id                       title                                 summary
+  &lt;chr&gt;                            &lt;chr&gt;                                 &lt;chr&gt;  
+1 tas_baseline_2000_2020_depthsurf Bio-Oracle AirTemperature [depthSurf… "Uses …
+2 tas_ssp119_2020_2100_depthsurf   Bio-Oracle AirTemperature [depthSurf… "Uses …
+3 tas_ssp126_2020_2100_depthsurf   Bio-Oracle AirTemperature [depthSurf… "Uses …
+4 tas_ssp245_2020_2100_depthsurf   Bio-Oracle AirTemperature [depthSurf… "Uses …
+5 tas_ssp370_2020_2100_depthsurf   Bio-Oracle AirTemperature [depthSurf… "Uses …
+6 tas_ssp460_2020_2100_depthsurf   Bio-Oracle AirTemperature [depthSurf… "Uses …</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">biooracle_var_filtered</span> <span class="op">&lt;-</span> <span class="va">biooracle_var</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>    <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="fu">stringr</span><span class="fu">::</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_detect.html">str_detect</a></span><span class="op">(</span><span class="va">dataset_id</span>, <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="va">var_names</span>, collapse <span class="op">=</span> <span class="st">"|"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>    <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="fu">stringr</span><span class="fu">::</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_detect.html">str_detect</a></span><span class="op">(</span><span class="va">title</span>, <span class="st">"Baseline|Terrain"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>    <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="fu">stringr</span><span class="fu">::</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_detect.html">str_detect</a></span><span class="op">(</span><span class="va">title</span>, <span class="st">"depthMin|Terrain"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rspatial.github.io/terra/reference/headtail.html">head</a></span><span class="op">(</span><span class="va">biooracle_var_filtered</span><span class="op">)</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 3
+  dataset_id                         title                               summary
+  &lt;chr&gt;                              &lt;chr&gt;                               &lt;chr&gt;  
+1 chl_baseline_2000_2018_depthmin    Bio-Oracle Chlorophyll [depthMin] … "Uses …
+2 thetao_baseline_2000_2019_depthmin Bio-Oracle OceanTemperature [depth… "Uses …
+3 terrain_characteristics            Bio-Oracle Terrain characteristics… "Uses …</code></pre>
+</div>
+</div>
+<p>Vamos fazer algumas escolhas para download.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># details to download</span></span>
+<span><span class="va">dataset_id</span> <span class="op">&lt;-</span> <span class="va">biooracle_var_filtered</span><span class="op">$</span><span class="va">dataset_id</span></span>
+<span></span>
+<span><span class="va">time</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'2000-01-01T00:00:00Z'</span>, <span class="st">'2010-01-01T00:00:00Z'</span><span class="op">)</span></span>
+<span><span class="va">longitude</span> <span class="op">&lt;-</span> <span class="fu">sf</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_bbox.html">st_bbox</a></span><span class="op">(</span><span class="va">brazil_buffer</span><span class="op">)</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">3</span><span class="op">)</span><span class="op">]</span></span>
+<span><span class="va">latitude</span> <span class="op">&lt;-</span> <span class="fu">sf</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_bbox.html">st_bbox</a></span><span class="op">(</span><span class="va">brazil_buffer</span><span class="op">)</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">4</span><span class="op">)</span><span class="op">]</span></span>
+<span></span>
+<span><span class="va">constraints</span> <span class="op">&lt;-</span>  <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">time</span>, <span class="va">latitude</span>, <span class="va">longitude</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rspatial.github.io/terra/reference/names.html">names</a></span><span class="op">(</span><span class="va">constraints</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"time"</span>, <span class="st">"latitude"</span>, <span class="st">"longitude"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">constraints_terrain</span> <span class="op">&lt;-</span> <span class="va">constraints</span></span>
+<span><span class="va">constraints_terrain</span><span class="op">$</span><span class="va">time</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"1970-01-01T00:00:00Z"</span>, <span class="st">"1970-01-01T00:00:00Z"</span><span class="op">)</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Vamos fazer o download em um diretório temporário e selecionar apenas as variáveis médias.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># download</span></span>
+<span><span class="va">var01</span> <span class="op">&lt;-</span> <span class="fu">biooracler</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/biooracler/man/download_layers.html">download_layers</a></span><span class="op">(</span></span>
+<span>    dataset_id <span class="op">=</span> <span class="va">dataset_id</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>,</span>
+<span>    constraints <span class="op">=</span> <span class="va">constraints</span>, </span>
+<span>    fmt <span class="op">=</span> <span class="st">"raster"</span>, </span>
+<span>    directory <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html">tempdir</a></span><span class="op">(</span><span class="op">)</span>, </span>
+<span>    verbose <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="va">var01</span> <span class="op">&lt;-</span> <span class="va">var01</span><span class="op">[[</span><span class="fl">7</span><span class="op">]</span><span class="op">]</span></span>
+<span></span>
+<span><span class="va">var02</span> <span class="op">&lt;-</span> <span class="fu">biooracler</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/biooracler/man/download_layers.html">download_layers</a></span><span class="op">(</span></span>
+<span>    dataset_id <span class="op">=</span> <span class="va">dataset_id</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span>,</span>
+<span>    constraints <span class="op">=</span> <span class="va">constraints</span>, </span>
+<span>    fmt <span class="op">=</span> <span class="st">"raster"</span>, </span>
+<span>    directory <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html">tempdir</a></span><span class="op">(</span><span class="op">)</span>, </span>
+<span>    verbose <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="va">var02</span> <span class="op">&lt;-</span> <span class="va">var02</span><span class="op">[[</span><span class="fl">7</span><span class="op">]</span><span class="op">]</span></span>
+<span></span>
+<span><span class="va">var03</span> <span class="op">&lt;-</span> <span class="fu">biooracler</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/biooracler/man/download_layers.html">download_layers</a></span><span class="op">(</span></span>
+<span>    dataset_id <span class="op">=</span> <span class="va">dataset_id</span><span class="op">[</span><span class="fl">3</span><span class="op">]</span>,</span>
+<span>    constraints <span class="op">=</span> <span class="va">constraints_terrain</span>, </span>
+<span>    fmt <span class="op">=</span> <span class="st">"raster"</span>, </span>
+<span>    directory <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html">tempdir</a></span><span class="op">(</span><span class="op">)</span>, </span>
+<span>    verbose <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="va">var03</span> <span class="op">&lt;-</span> <span class="va">var03</span><span class="op">[[</span><span class="fl">4</span><span class="op">]</span><span class="op">]</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Vamos fazer o corte das variáveis para nossa área de interesse.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># bind and crop</span></span>
+<span><span class="va">var_brazil</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">var01</span>, <span class="va">var02</span>, <span class="va">var03</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>    <span class="fu">terra</span><span class="fu">::</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/crop.html">crop</a></span><span class="op">(</span><span class="va">brazil_buffer</span>, mask <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># names</span></span>
+<span><span class="fu"><a href="https://rspatial.github.io/terra/reference/names.html">names</a></span><span class="op">(</span><span class="va">var_brazil</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu">stringr</span><span class="fu">::</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_replace.html">str_replace_all</a></span><span class="op">(</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/names.html">names</a></span><span class="op">(</span><span class="va">var_brazil</span><span class="op">)</span>, <span class="st">"_mean_1"</span>, <span class="st">""</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rspatial.github.io/terra/reference/names.html">names</a></span><span class="op">(</span><span class="va">var_brazil</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu">stringr</span><span class="fu">::</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_replace.html">str_replace_all</a></span><span class="op">(</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/names.html">names</a></span><span class="op">(</span><span class="va">var_brazil</span><span class="op">)</span>, <span class="st">"_mean"</span>, <span class="st">""</span><span class="op">)</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Vamos fazer um mapa para conferir as variáveis.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://r-tmap.github.io/tmap/reference/tm_shape.html">tm_shape</a></span><span class="op">(</span><span class="va">var_brazil</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://r-tmap.github.io/tmap/reference/tm_raster.html">tm_raster</a></span><span class="op">(</span></span>
+<span>        col.scale <span class="op">=</span> <span class="fu"><a href="https://r-tmap.github.io/tmap/reference/tm_scale_continuous.html">tm_scale_continuous</a></span><span class="op">(</span>values <span class="op">=</span> <span class="st">"brewer.blues"</span><span class="op">)</span>,</span>
+<span>        col.legend <span class="op">=</span> <span class="fu"><a href="https://r-tmap.github.io/tmap/reference/tm_legend.html">tm_legend_hide</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://r-tmap.github.io/tmap/reference/tm_facets.html">tm_facets</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://r-tmap.github.io/tmap/reference/tm_shape.html">tm_shape</a></span><span class="op">(</span><span class="va">brazil_buffer</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://r-tmap.github.io/tmap/reference/tm_polygons.html">tm_borders</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://r-tmap.github.io/tmap/reference/tm_shape.html">tm_shape</a></span><span class="op">(</span><span class="va">brazil</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://r-tmap.github.io/tmap/reference/tm_polygons.html">tm_fill</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://r-tmap.github.io/tmap/reference/tm_grid.html">tm_graticules</a></span><span class="op">(</span>lines <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://r-tmap.github.io/tmap/reference/tm_layout.html">tm_layout</a></span><span class="op">(</span>frame <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="cap24_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section></section><section id="modelos" class="level2" data-number="24.4"><h2 data-number="24.4" class="anchored" data-anchor-id="modelos">
+<span class="header-section-number">24.4</span> Modelos</h2>
+<p>Definir um número de cores do processador para paralelização.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">## parameters ----</span></span>
+<span><span class="co"># cores</span></span>
+<span><span class="va">n_cores</span> <span class="op">&lt;-</span> <span class="fu">parallel</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/parallel/detectCores.html">detectCores</a></span><span class="op">(</span>logical <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">-</span> <span class="fl">2</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<section id="ocorrências-e-área-de-calibração" class="level3" data-number="24.4.1"><h3 data-number="24.4.1" class="anchored" data-anchor-id="ocorrências-e-área-de-calibração">
+<span class="header-section-number">24.4.1</span> Ocorrências e área de calibração</h3>
+<p>Vamos começar a ajustar os modelos. Primeiro, vamos ajustar os dados de ocorrências.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb23"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">## species filter ----</span></span>
+<span><span class="va">occ_sp</span> <span class="op">&lt;-</span> <span class="va">occ_data</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>    <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/rownames.html">rowid_to_column</a></span><span class="op">(</span>var <span class="op">=</span> <span class="st">"id"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>    <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>pr_ab <span class="op">=</span> <span class="fl">1</span>, occ_filter <span class="op">=</span> <span class="st">"total"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>    <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">id</span>, <span class="va">x</span>, <span class="va">y</span>, <span class="va">pr_ab</span>, <span class="va">occ_filter</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rspatial.github.io/terra/reference/headtail.html">head</a></span><span class="op">(</span><span class="va">occ_sp</span><span class="op">)</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 5
+     id     x      y pr_ab occ_filter
+  &lt;int&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;     
+1     1 -38.1 -12.6      1 total     
+2     2 -52.5   5.39     1 total     
+3     3 -34.9  -8.47     1 total     
+4     4 -34.8  -7.98     1 total     
+5     5 -34.8  -7.80     1 total     
+6     6 -34.9  -7.98     1 total     </code></pre>
+</div>
+</div>
+<p>Vamos agora definir uma área de calibração.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb25"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">## calibration area ----</span></span>
+<span><span class="va">ca</span> <span class="op">&lt;-</span> <span class="va">brazil_buffer</span></span>
+<span></span>
+<span><span class="co"># map</span></span>
+<span><span class="fu"><a href="https://r-tmap.github.io/tmap/reference/tm_shape.html">tm_shape</a></span><span class="op">(</span><span class="va">brazil_buffer</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://r-tmap.github.io/tmap/reference/tm_polygons.html">tm_borders</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://r-tmap.github.io/tmap/reference/tm_shape.html">tm_shape</a></span><span class="op">(</span><span class="va">brazil</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://r-tmap.github.io/tmap/reference/tm_polygons.html">tm_fill</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://r-tmap.github.io/tmap/reference/tm_shape.html">tm_shape</a></span><span class="op">(</span><span class="fu">sf</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_as_sf.html">st_as_sf</a></span><span class="op">(</span><span class="va">occ_sp</span>, coords <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"x"</span>, <span class="st">"y"</span><span class="op">)</span>, crs <span class="op">=</span> <span class="fl">4326</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://r-tmap.github.io/tmap/reference/tm_symbols.html">tm_bubbles</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">.3</span>, fill <span class="op">=</span> <span class="st">"black"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://r-tmap.github.io/tmap/reference/tm_grid.html">tm_graticules</a></span><span class="op">(</span>lines <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://r-tmap.github.io/tmap/reference/tm_layout.html">tm_layout</a></span><span class="op">(</span>frame <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="cap24_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section><section id="variáveis-e-correlação" class="level3" data-number="24.4.2"><h3 data-number="24.4.2" class="anchored" data-anchor-id="variáveis-e-correlação">
+<span class="header-section-number">24.4.2</span> Variáveis e correlação</h3>
+<p>Vamos conferir a correlação entre as variáveis e depois fazer uma padronização das mesmas.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb26"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">## collinearity variables ----</span></span>
+<span><span class="va">var_ca</span> <span class="op">&lt;-</span> <span class="va">var_brazil</span></span>
+<span></span>
+<span><span class="va">var_ca_colin</span> <span class="op">&lt;-</span> <span class="fu">flexsdm</span><span class="fu">::</span><span class="fu"><a href="https://sjevelazco.github.io/flexsdm/reference/correct_colinvar.html">correct_colinvar</a></span><span class="op">(</span>env_layer <span class="op">=</span> <span class="va">var_ca</span>, </span>
+<span>                                          method <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"vif"</span>, th <span class="op">=</span> <span class="st">"5"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">var_ca_sel_names</span> <span class="op">&lt;-</span> <span class="va">var_ca_colin</span><span class="op">$</span><span class="va">vif_table</span><span class="op">$</span><span class="va">Variables</span></span>
+<span><span class="va">var_ca_sel</span> <span class="op">&lt;-</span> <span class="fu">terra</span><span class="fu">::</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/scale.html">scale</a></span><span class="op">(</span><span class="va">var_ca_colin</span><span class="op">$</span><span class="va">env_layer</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://r-tmap.github.io/tmap/reference/tm_shape.html">tm_shape</a></span><span class="op">(</span><span class="va">var_ca_sel</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://r-tmap.github.io/tmap/reference/tm_raster.html">tm_raster</a></span><span class="op">(</span></span>
+<span>        col.scale <span class="op">=</span> <span class="fu"><a href="https://r-tmap.github.io/tmap/reference/tm_scale_continuous.html">tm_scale_continuous</a></span><span class="op">(</span>values <span class="op">=</span> <span class="st">"brewer.blues"</span><span class="op">)</span>,</span>
+<span>        col.legend <span class="op">=</span> <span class="fu"><a href="https://r-tmap.github.io/tmap/reference/tm_legend.html">tm_legend_hide</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://r-tmap.github.io/tmap/reference/tm_facets.html">tm_facets</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://r-tmap.github.io/tmap/reference/tm_shape.html">tm_shape</a></span><span class="op">(</span><span class="va">brazil_buffer</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://r-tmap.github.io/tmap/reference/tm_polygons.html">tm_borders</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://r-tmap.github.io/tmap/reference/tm_shape.html">tm_shape</a></span><span class="op">(</span><span class="va">brazil</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://r-tmap.github.io/tmap/reference/tm_polygons.html">tm_fill</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://r-tmap.github.io/tmap/reference/tm_grid.html">tm_graticules</a></span><span class="op">(</span>lines <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://r-tmap.github.io/tmap/reference/tm_layout.html">tm_layout</a></span><span class="op">(</span>frame <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="cap24_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section><section id="filtro-ambiental-das-ocorrências" class="level3" data-number="24.4.3"><h3 data-number="24.4.3" class="anchored" data-anchor-id="filtro-ambiental-das-ocorrências">
+<span class="header-section-number">24.4.3</span> Filtro ambiental das ocorrências</h3>
+<p>Vamos agora fazer um filtro ambiental e geográfico das ocorrências para reduzir o viés de amostragem.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb27"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">## occurrences environmental filtering ----</span></span>
+<span><span class="va">occ_sp_env_filt</span> <span class="op">&lt;-</span> <span class="fu">flexsdm</span><span class="fu">::</span><span class="fu"><a href="https://sjevelazco.github.io/flexsdm/reference/occfilt_env.html">occfilt_env</a></span><span class="op">(</span></span>
+<span>    data <span class="op">=</span> <span class="va">occ_sp</span>, </span>
+<span>    x <span class="op">=</span> <span class="st">"x"</span>, </span>
+<span>    y <span class="op">=</span> <span class="st">"y"</span>, </span>
+<span>    id <span class="op">=</span> <span class="st">"id"</span>,</span>
+<span>    env_layer <span class="op">=</span> <span class="va">var_ca_sel</span>, </span>
+<span>    nbins <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">10</span>, <span class="fl">15</span>, <span class="fl">20</span>, <span class="fl">25</span>, <span class="fl">30</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">occ_sp_env_filt_sel</span> <span class="op">&lt;-</span> <span class="fu">flexsdm</span><span class="fu">::</span><span class="fu"><a href="https://sjevelazco.github.io/flexsdm/reference/occfilt_select.html">occfilt_select</a></span><span class="op">(</span></span>
+<span>    occ_list <span class="op">=</span> <span class="va">occ_sp_env_filt</span>,</span>
+<span>    x <span class="op">=</span> <span class="st">"x"</span>,</span>
+<span>    y <span class="op">=</span> <span class="st">"y"</span>,</span>
+<span>    env_layer <span class="op">=</span> <span class="va">var_ca_sel</span>,</span>
+<span>    filter_prop <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">occ_sp_filt</span> <span class="op">&lt;-</span> <span class="va">occ_sp_env_filt_sel</span><span class="op">$</span><span class="va">occ</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>    <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>pr_ab <span class="op">=</span> <span class="fl">1</span>, occ_filter <span class="op">=</span> <span class="st">"filtered"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://r-tmap.github.io/tmap/reference/tm_shape.html">tm_shape</a></span><span class="op">(</span><span class="va">brazil_buffer</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://r-tmap.github.io/tmap/reference/tm_polygons.html">tm_borders</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://r-tmap.github.io/tmap/reference/tm_shape.html">tm_shape</a></span><span class="op">(</span><span class="va">brazil</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://r-tmap.github.io/tmap/reference/tm_polygons.html">tm_fill</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://r-tmap.github.io/tmap/reference/tm_shape.html">tm_shape</a></span><span class="op">(</span><span class="fu">terra</span><span class="fu">::</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/vect.html">vect</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html">rbind</a></span><span class="op">(</span><span class="va">occ_sp</span>, <span class="va">occ_sp_filt</span><span class="op">)</span>, geom <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"x"</span>, <span class="st">"y"</span><span class="op">)</span>, crs <span class="op">=</span> <span class="st">"EPSG:4326"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://r-tmap.github.io/tmap/reference/tm_symbols.html">tm_dots</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="st">"occ_filter"</span>,</span>
+<span>            fill.scale <span class="op">=</span> <span class="fu"><a href="https://r-tmap.github.io/tmap/reference/tm_scale_categorical.html">tm_scale_categorical</a></span><span class="op">(</span>values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"black"</span>, <span class="st">"red"</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>            fill.legend <span class="op">=</span> <span class="fu"><a href="https://r-tmap.github.io/tmap/reference/tm_legend.html">tm_legend</a></span><span class="op">(</span>position <span class="op">=</span> <span class="fu"><a href="https://r-tmap.github.io/tmap/reference/tm_pos.html">tm_pos_in</a></span><span class="op">(</span>pos.h <span class="op">=</span> <span class="st">"right"</span>, pos.v <span class="op">=</span> <span class="st">"bottom"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="cap24_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section><section id="amostragem-das-pseudoausência-e-pontos-de-fundo" class="level3" data-number="24.4.4"><h3 data-number="24.4.4" class="anchored" data-anchor-id="amostragem-das-pseudoausência-e-pontos-de-fundo">
+<span class="header-section-number">24.4.4</span> Amostragem das pseudoausência e pontos de fundo</h3>
+<p>Vamos fazer o sorteio dos pontos de pseudoausência e ponto de fundo (<em>background</em>). O primeiro é para os algoritmos que dependem de ausência. O segundo, para os algoritmos que usando pontos de fundo, como o MaxEnt.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb28"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">### pseudo-absence sampling ----</span></span>
+<span><span class="va">psa</span> <span class="op">&lt;-</span> <span class="fu">flexsdm</span><span class="fu">::</span><span class="fu"><a href="https://sjevelazco.github.io/flexsdm/reference/sample_pseudoabs.html">sample_pseudoabs</a></span><span class="op">(</span></span>
+<span>    data <span class="op">=</span> <span class="va">occ_sp_filt</span>,</span>
+<span>    x <span class="op">=</span> <span class="st">"x"</span>,</span>
+<span>    y <span class="op">=</span> <span class="st">"y"</span>,</span>
+<span>    n <span class="op">=</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/dimensions.html">nrow</a></span><span class="op">(</span><span class="va">occ_sp_filt</span><span class="op">)</span> <span class="op">*</span> <span class="fl">1</span>,</span>
+<span>    method <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>method <span class="op">=</span> <span class="st">"geoenv_const"</span>, width <span class="op">=</span> <span class="st">"100000"</span>, env <span class="op">=</span> <span class="va">var_ca_sel</span><span class="op">)</span>,</span>
+<span>    rlayer <span class="op">=</span> <span class="va">var_ca_sel</span>,</span>
+<span>    calibarea <span class="op">=</span> <span class="va">ca</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rspatial.github.io/terra/reference/headtail.html">head</a></span><span class="op">(</span><span class="va">psa</span><span class="op">)</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 3
+      x       y pr_ab
+  &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;
+1 -37.0 -24.7       0
+2 -49.1   1.52      0
+3 -53.0 -33.6       0
+4 -39.6  -0.425     0
+5 -54.0 -35.1       0
+6 -33.1  -5.28      0</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb30"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://r-tmap.github.io/tmap/reference/tm_shape.html">tm_shape</a></span><span class="op">(</span><span class="va">brazil_buffer</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://r-tmap.github.io/tmap/reference/tm_polygons.html">tm_borders</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://r-tmap.github.io/tmap/reference/tm_shape.html">tm_shape</a></span><span class="op">(</span><span class="va">brazil</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://r-tmap.github.io/tmap/reference/tm_polygons.html">tm_fill</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://r-tmap.github.io/tmap/reference/tm_shape.html">tm_shape</a></span><span class="op">(</span><span class="fu">terra</span><span class="fu">::</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/vect.html">vect</a></span><span class="op">(</span><span class="va">psa</span>, geom <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"x"</span>, <span class="st">"y"</span><span class="op">)</span>, crs <span class="op">=</span> <span class="st">"EPSG:4326"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://r-tmap.github.io/tmap/reference/tm_symbols.html">tm_dots</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="st">"gray50"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://r-tmap.github.io/tmap/reference/tm_shape.html">tm_shape</a></span><span class="op">(</span><span class="fu">terra</span><span class="fu">::</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/vect.html">vect</a></span><span class="op">(</span><span class="va">occ_sp_filt</span>, geom <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"x"</span>, <span class="st">"y"</span><span class="op">)</span>, crs <span class="op">=</span> <span class="st">"EPSG:4326"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://r-tmap.github.io/tmap/reference/tm_symbols.html">tm_dots</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="cap24_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb31"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">### background sampling ----</span></span>
+<span><span class="va">bg</span> <span class="op">&lt;-</span> <span class="fu">flexsdm</span><span class="fu">::</span><span class="fu"><a href="https://sjevelazco.github.io/flexsdm/reference/sample_background.html">sample_background</a></span><span class="op">(</span></span>
+<span>    data <span class="op">=</span> <span class="va">occ_sp_filt</span>,</span>
+<span>    x <span class="op">=</span> <span class="st">"x"</span>,</span>
+<span>    y <span class="op">=</span> <span class="st">"y"</span>,</span>
+<span>    n <span class="op">=</span> <span class="fl">1000</span>,</span>
+<span>    method <span class="op">=</span> <span class="st">"thickening"</span>,</span>
+<span>    rlayer <span class="op">=</span> <span class="va">var_ca_sel</span>,</span>
+<span>    calibarea <span class="op">=</span> <span class="va">ca</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rspatial.github.io/terra/reference/headtail.html">head</a></span><span class="op">(</span><span class="va">bg</span><span class="op">)</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 3
+      x     y pr_ab
+  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+1 -34.8 -16.7     0
+2 -49.4 -29.3     0
+3 -37.6 -15.8     0
+4 -36.5 -21.4     0
+5 -38.4 -24.9     0
+6 -35.5 -12.2     0</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb33"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://r-tmap.github.io/tmap/reference/tm_shape.html">tm_shape</a></span><span class="op">(</span><span class="va">brazil_buffer</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://r-tmap.github.io/tmap/reference/tm_polygons.html">tm_borders</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://r-tmap.github.io/tmap/reference/tm_shape.html">tm_shape</a></span><span class="op">(</span><span class="va">brazil</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://r-tmap.github.io/tmap/reference/tm_polygons.html">tm_fill</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://r-tmap.github.io/tmap/reference/tm_shape.html">tm_shape</a></span><span class="op">(</span><span class="fu">terra</span><span class="fu">::</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/vect.html">vect</a></span><span class="op">(</span><span class="va">bg</span>, geom <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"x"</span>, <span class="st">"y"</span><span class="op">)</span>, crs <span class="op">=</span> <span class="st">"EPSG:4326"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://r-tmap.github.io/tmap/reference/tm_symbols.html">tm_dots</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="st">"gray50"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://r-tmap.github.io/tmap/reference/tm_shape.html">tm_shape</a></span><span class="op">(</span><span class="fu">terra</span><span class="fu">::</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/vect.html">vect</a></span><span class="op">(</span><span class="va">occ_sp_filt</span>, geom <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"x"</span>, <span class="st">"y"</span><span class="op">)</span>, crs <span class="op">=</span> <span class="st">"EPSG:4326"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://r-tmap.github.io/tmap/reference/tm_symbols.html">tm_dots</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="cap24_files/figure-html/unnamed-chunk-17-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section><section id="partição-dos-dados" class="level3" data-number="24.4.5"><h3 data-number="24.4.5" class="anchored" data-anchor-id="partição-dos-dados">
+<span class="header-section-number">24.4.5</span> Partição dos dados</h3>
+<p>Vamos preparar agora o partionamento dos dados em treino (ajuste) e teste (avaliação) dos modelos.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb34"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">### data partitioning ----</span></span>
+<span></span>
+<span><span class="co">#### pseudoabsence ----</span></span>
+<span><span class="va">occ_sp_filt_psa</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">rbind</a></span><span class="op">(</span><span class="va">occ_sp_filt</span><span class="op">[</span>, <span class="fl">2</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span>, <span class="va">psa</span><span class="op">)</span></span>
+<span><span class="va">n_part_while</span> <span class="op">&lt;-</span> <span class="fl">5</span></span>
+<span><span class="va">min_occ</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/dimensions.html">nrow</a></span><span class="op">(</span><span class="va">occ_sp_filt</span><span class="op">)</span> <span class="op">&gt;=</span> <span class="fl">30</span>, <span class="fl">10</span>, <span class="fl">5</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">occ_sp_filt_psa_part</span> <span class="op">&lt;-</span> <span class="cn">NA</span></span>
+<span><span class="kw">while</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/any.html">any</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">occ_sp_filt_psa_part</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">{</span></span>
+<span>    <span class="va">occ_sp_filt_psa_part</span> <span class="op">&lt;-</span> <span class="fu">flexsdm</span><span class="fu">::</span><span class="fu"><a href="https://sjevelazco.github.io/flexsdm/reference/part_sblock.html">part_sblock</a></span><span class="op">(</span></span>
+<span>        data <span class="op">=</span> <span class="va">occ_sp_filt_psa</span>,</span>
+<span>        env_layer <span class="op">=</span> <span class="va">var_ca_sel</span>,</span>
+<span>        pr_ab <span class="op">=</span> <span class="st">"pr_ab"</span>,</span>
+<span>        x <span class="op">=</span> <span class="st">"x"</span>,</span>
+<span>        y <span class="op">=</span> <span class="st">"y"</span>,</span>
+<span>        n_part <span class="op">=</span> <span class="va">n_part_while</span>,</span>
+<span>        min_occ <span class="op">=</span> <span class="va">min_occ</span>, </span>
+<span>        prop <span class="op">=</span> <span class="fl">.5</span><span class="op">)</span></span>
+<span>    <span class="va">n_part_while</span> <span class="op">&lt;-</span> <span class="va">n_part_while</span> <span class="op">-</span> <span class="fl">1</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="va">occ_sp_filt_psa_part_grid_ca</span> <span class="op">&lt;-</span> <span class="fu">flexsdm</span><span class="fu">::</span><span class="fu"><a href="https://sjevelazco.github.io/flexsdm/reference/get_block.html">get_block</a></span><span class="op">(</span>env_layer <span class="op">=</span> <span class="va">var_ca_sel</span>, </span>
+<span>                                                   best_grid <span class="op">=</span> <span class="va">occ_sp_filt_psa_part</span><span class="op">$</span><span class="va">grid</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">n_part_color</span> <span class="op">&lt;-</span> <span class="fu">cols4all</span><span class="fu">::</span><span class="fu"><a href="https://cols4all.github.io/reference/c4a.html">c4a</a></span><span class="op">(</span><span class="st">"magma"</span>, n <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">occ_sp_filt_psa_part</span><span class="op">$</span><span class="va">part</span><span class="op">$</span><span class="va">.part</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">n_part_color_occs</span> <span class="op">&lt;-</span> <span class="fu">cols4all</span><span class="fu">::</span><span class="fu"><a href="https://cols4all.github.io/reference/c4a.html">c4a</a></span><span class="op">(</span><span class="st">"set1"</span>, n <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">occ_sp_filt_psa_part</span><span class="op">$</span><span class="va">part</span><span class="op">$</span><span class="va">.part</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://r-tmap.github.io/tmap/reference/tm_shape.html">tm_shape</a></span><span class="op">(</span><span class="va">brazil_buffer</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://r-tmap.github.io/tmap/reference/tm_polygons.html">tm_borders</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://r-tmap.github.io/tmap/reference/tm_shape.html">tm_shape</a></span><span class="op">(</span><span class="va">brazil</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://r-tmap.github.io/tmap/reference/tm_polygons.html">tm_fill</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://r-tmap.github.io/tmap/reference/tm_shape.html">tm_shape</a></span><span class="op">(</span><span class="va">occ_sp_filt_psa_part_grid_ca</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://r-tmap.github.io/tmap/reference/tm_raster.html">tm_raster</a></span><span class="op">(</span>col.legend <span class="op">=</span> <span class="fu"><a href="https://r-tmap.github.io/tmap/reference/tm_legend.html">tm_legend</a></span><span class="op">(</span>show <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>,</span>
+<span>              col.scale <span class="op">=</span> <span class="fu"><a href="https://r-tmap.github.io/tmap/reference/tm_scale_categorical.html">tm_scale_categorical</a></span><span class="op">(</span>values <span class="op">=</span> <span class="va">n_part_color</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://r-tmap.github.io/tmap/reference/tm_shape.html">tm_shape</a></span><span class="op">(</span><span class="va">ca</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://r-tmap.github.io/tmap/reference/tm_polygons.html">tm_borders</a></span><span class="op">(</span>col <span class="op">=</span> <span class="st">"red"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://r-tmap.github.io/tmap/reference/tm_shape.html">tm_shape</a></span><span class="op">(</span><span class="fu">terra</span><span class="fu">::</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/vect.html">vect</a></span><span class="op">(</span><span class="va">occ_sp_filt_psa_part</span><span class="op">$</span><span class="va">part</span>, geom <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"x"</span>, <span class="st">"y"</span><span class="op">)</span>, crs <span class="op">=</span> <span class="st">"EPSG:4326"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://r-tmap.github.io/tmap/reference/tm_symbols.html">tm_dots</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="st">".part"</span>,</span>
+<span>            shape <span class="op">=</span> <span class="st">"pr_ab"</span>,</span>
+<span>            size <span class="op">=</span> <span class="fl">.5</span>,</span>
+<span>            fill.scale <span class="op">=</span> <span class="fu"><a href="https://r-tmap.github.io/tmap/reference/tm_scale_categorical.html">tm_scale_categorical</a></span><span class="op">(</span>values <span class="op">=</span> <span class="va">n_part_color_occs</span><span class="op">)</span>,</span>
+<span>            fill.legend <span class="op">=</span> <span class="fu"><a href="https://r-tmap.github.io/tmap/reference/tm_legend.html">tm_legend</a></span><span class="op">(</span>position <span class="op">=</span> <span class="fu"><a href="https://r-tmap.github.io/tmap/reference/tm_pos.html">tm_pos_in</a></span><span class="op">(</span>pos.h <span class="op">=</span> <span class="st">"right"</span>, pos.v <span class="op">=</span> <span class="st">"bottom"</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>            shape.scale <span class="op">=</span> <span class="fu"><a href="https://r-tmap.github.io/tmap/reference/tm_scale_categorical.html">tm_scale_categorical</a></span><span class="op">(</span>values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">17</span>, <span class="fl">16</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>            shape.legend <span class="op">=</span> <span class="fu"><a href="https://r-tmap.github.io/tmap/reference/tm_legend.html">tm_legend</a></span><span class="op">(</span>position <span class="op">=</span> <span class="fu"><a href="https://r-tmap.github.io/tmap/reference/tm_pos.html">tm_pos_in</a></span><span class="op">(</span>pos.h <span class="op">=</span> <span class="st">"right"</span>, pos.v <span class="op">=</span> <span class="st">"bottom"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="cap24_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb35"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">#### background ----</span></span>
+<span><span class="va">bg_part</span> <span class="op">&lt;-</span> <span class="fu">flexsdm</span><span class="fu">::</span><span class="fu"><a href="https://sjevelazco.github.io/flexsdm/reference/sdm_extract.html">sdm_extract</a></span><span class="op">(</span></span>
+<span>    data <span class="op">=</span> <span class="va">bg</span>,</span>
+<span>    x <span class="op">=</span> <span class="st">"x"</span>,</span>
+<span>    y <span class="op">=</span> <span class="st">"y"</span>,</span>
+<span>    env_layer <span class="op">=</span> <span class="va">occ_sp_filt_psa_part</span><span class="op">$</span><span class="va">grid</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://r-tmap.github.io/tmap/reference/tm_shape.html">tm_shape</a></span><span class="op">(</span><span class="va">brazil_buffer</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://r-tmap.github.io/tmap/reference/tm_polygons.html">tm_borders</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://r-tmap.github.io/tmap/reference/tm_shape.html">tm_shape</a></span><span class="op">(</span><span class="va">brazil</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://r-tmap.github.io/tmap/reference/tm_polygons.html">tm_fill</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://r-tmap.github.io/tmap/reference/tm_shape.html">tm_shape</a></span><span class="op">(</span><span class="va">occ_sp_filt_psa_part_grid_ca</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://r-tmap.github.io/tmap/reference/tm_raster.html">tm_raster</a></span><span class="op">(</span>col.legend <span class="op">=</span> <span class="fu"><a href="https://r-tmap.github.io/tmap/reference/tm_legend.html">tm_legend</a></span><span class="op">(</span>show <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>,</span>
+<span>              col.scale <span class="op">=</span> <span class="fu"><a href="https://r-tmap.github.io/tmap/reference/tm_scale_categorical.html">tm_scale_categorical</a></span><span class="op">(</span>values <span class="op">=</span> <span class="va">n_part_color</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://r-tmap.github.io/tmap/reference/tm_shape.html">tm_shape</a></span><span class="op">(</span><span class="va">ca</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://r-tmap.github.io/tmap/reference/tm_polygons.html">tm_borders</a></span><span class="op">(</span>col <span class="op">=</span> <span class="st">"red"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://r-tmap.github.io/tmap/reference/tm_shape.html">tm_shape</a></span><span class="op">(</span><span class="fu">terra</span><span class="fu">::</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/vect.html">vect</a></span><span class="op">(</span><span class="va">bg_part</span>, geom <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"x"</span>, <span class="st">"y"</span><span class="op">)</span>, crs <span class="op">=</span> <span class="st">"EPSG:4326"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://r-tmap.github.io/tmap/reference/tm_symbols.html">tm_dots</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="st">".part"</span>,</span>
+<span>            size <span class="op">=</span> <span class="fl">.5</span>,</span>
+<span>            fill.scale <span class="op">=</span> <span class="fu"><a href="https://r-tmap.github.io/tmap/reference/tm_scale_categorical.html">tm_scale_categorical</a></span><span class="op">(</span>values <span class="op">=</span> <span class="va">n_part_color_occs</span><span class="op">)</span>,</span>
+<span>            fill.legend <span class="op">=</span> <span class="fu"><a href="https://r-tmap.github.io/tmap/reference/tm_legend.html">tm_legend</a></span><span class="op">(</span>position <span class="op">=</span> <span class="fu"><a href="https://r-tmap.github.io/tmap/reference/tm_pos.html">tm_pos_in</a></span><span class="op">(</span>pos.h <span class="op">=</span> <span class="st">"right"</span>, pos.v <span class="op">=</span> <span class="st">"bottom"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="cap24_files/figure-html/unnamed-chunk-18-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section><section id="extração-dos-dados-ambientais" class="level3" data-number="24.4.6"><h3 data-number="24.4.6" class="anchored" data-anchor-id="extração-dos-dados-ambientais">
+<span class="header-section-number">24.4.6</span> Extração dos dados ambientais</h3>
+<p>Vamos agora extrair os dados ambientais para os pontos de ocorrência, pseudoausência e de fundo.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb36"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">### extracting environmental values ----</span></span>
+<span><span class="va">occ_sp_filt_psa_part_data</span> <span class="op">&lt;-</span> <span class="fu">flexsdm</span><span class="fu">::</span><span class="fu"><a href="https://sjevelazco.github.io/flexsdm/reference/sdm_extract.html">sdm_extract</a></span><span class="op">(</span></span>
+<span>    data <span class="op">=</span> <span class="va">occ_sp_filt_psa_part</span><span class="op">$</span><span class="va">part</span>,</span>
+<span>    x <span class="op">=</span> <span class="st">"x"</span>,</span>
+<span>    y <span class="op">=</span> <span class="st">"y"</span>,</span>
+<span>    env_layer <span class="op">=</span> <span class="va">var_ca_sel</span>,</span>
+<span>    filter_na <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rspatial.github.io/terra/reference/headtail.html">head</a></span><span class="op">(</span><span class="va">occ_sp_filt_psa_part_data</span><span class="op">)</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 7
+      x      y pr_ab .part     chl thetao bathymetry
+  &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt;   &lt;dbl&gt;  &lt;dbl&gt;      &lt;dbl&gt;
+1 -52.5   5.39     1     1  0.605    1.96       1.43
+2 -34.9  -8.47     1     3 -0.0111   2.09       1.43
+3 -34.8  -7.98     1     3  0.0393   2.11       1.44
+4 -34.8  -7.80     1     3  0.0786   2.12       1.44
+5 -52.3   4.99     1     1  0.748    2.17       1.44
+6 -45.5 -23.9      1     2  2.16     1.61       1.43</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb38"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">bg_part_data</span> <span class="op">&lt;-</span> <span class="fu">flexsdm</span><span class="fu">::</span><span class="fu"><a href="https://sjevelazco.github.io/flexsdm/reference/sdm_extract.html">sdm_extract</a></span><span class="op">(</span></span>
+<span>    data <span class="op">=</span> <span class="va">bg_part</span>,</span>
+<span>    x <span class="op">=</span> <span class="st">"x"</span>,</span>
+<span>    y <span class="op">=</span> <span class="st">"y"</span>,</span>
+<span>    env_layer <span class="op">=</span> <span class="va">var_ca_sel</span>,</span>
+<span>    filter_na <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rspatial.github.io/terra/reference/headtail.html">head</a></span><span class="op">(</span><span class="va">bg_part_data</span><span class="op">)</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 7
+      x     y pr_ab .part    chl thetao bathymetry
+  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt;  &lt;dbl&gt;  &lt;dbl&gt;      &lt;dbl&gt;
+1 -34.8 -16.7     0     2 -0.335 -0.672     -0.981
+2 -49.4 -29.3     0     3  1.38   1.14       1.42 
+3 -37.6 -15.8     0     2 -0.335 -0.619     -0.794
+4 -36.5 -21.4     0     3 -0.335 -0.703     -0.988
+5 -38.4 -24.9     0     2 -0.335 -0.617     -0.759
+6 -35.5 -12.2     0     2 -0.335 -0.671     -0.947</code></pre>
+</div>
+</div>
+</section><section id="ajuste-dos-modelos" class="level3" data-number="24.4.7"><h3 data-number="24.4.7" class="anchored" data-anchor-id="ajuste-dos-modelos">
+<span class="header-section-number">24.4.7</span> Ajuste dos modelos</h3>
+<p>Agora sim, podemos ajustar os modelos. Vamos usar quatro algoritmos:</p>
+<ul>
+<li>GAM: estatístico com presença e pseudoausência</li>
+<li>GAU: estatístico com presença e pontos de fundo</li>
+<li>GBM: <em>machine learning</em> com ajuste de hiperparâmetros com presença e pseudoausência</li>
+<li>MAX: <em>machine learning</em> com ajuste de hiperparâmetros com presença e pontos de fundo</li>
+</ul>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb40"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">### models ----</span></span>
+<span><span class="va">models_fitted</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">#### gam ----</span></span>
+<span><span class="va">fit_gam</span> <span class="op">&lt;-</span> <span class="fu">flexsdm</span><span class="fu">::</span><span class="fu"><a href="https://sjevelazco.github.io/flexsdm/reference/fit_gam.html">fit_gam</a></span><span class="op">(</span></span>
+<span>    data <span class="op">=</span> <span class="va">occ_sp_filt_psa_part_data</span>,</span>
+<span>    response <span class="op">=</span> <span class="st">"pr_ab"</span>,</span>
+<span>    predictors <span class="op">=</span> <span class="va">var_ca_sel_names</span>,</span>
+<span>    partition <span class="op">=</span> <span class="st">".part"</span>,</span>
+<span>    thr <span class="op">=</span> <span class="st">"max_sorensen"</span>,</span>
+<span>    k <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">models_fitted</span><span class="op">$</span><span class="va">gam</span> <span class="op">&lt;-</span> <span class="va">fit_gam</span></span>
+<span></span>
+<span><span class="co">#### gau ----</span></span>
+<span><span class="va">fit_gau</span> <span class="op">&lt;-</span> <span class="fu">flexsdm</span><span class="fu">::</span><span class="fu"><a href="https://sjevelazco.github.io/flexsdm/reference/fit_gau.html">fit_gau</a></span><span class="op">(</span></span>
+<span>    data <span class="op">=</span> <span class="va">occ_sp_filt_psa_part_data</span>,</span>
+<span>    response <span class="op">=</span> <span class="st">"pr_ab"</span>,</span>
+<span>    predictors <span class="op">=</span> <span class="va">var_ca_sel_names</span>,</span>
+<span>    partition <span class="op">=</span> <span class="st">".part"</span>,</span>
+<span>    background <span class="op">=</span> <span class="va">bg_part_data</span>,</span>
+<span>    thr <span class="op">=</span> <span class="st">"max_sorensen"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">models_fitted</span><span class="op">$</span><span class="va">gau</span> <span class="op">&lt;-</span> <span class="va">fit_gau</span></span>
+<span></span>
+<span><span class="co">#### gbm ----</span></span>
+<span><span class="va">tune_gbm_hyper</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/expand.grid.html">expand.grid</a></span><span class="op">(</span></span>
+<span>    n.trees <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">50</span>, <span class="fl">100</span>, <span class="fl">250</span>, <span class="fl">500</span><span class="op">)</span>,</span>
+<span>    shrinkage <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.1</span>, <span class="fl">0.5</span>, <span class="fl">1</span><span class="op">)</span>,</span>
+<span>    n.minobsinnode <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">3</span>, <span class="fl">5</span>, <span class="fl">7</span>, <span class="fl">9</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">tune_gbm</span> <span class="op">&lt;-</span> <span class="fu">flexsdm</span><span class="fu">::</span><span class="fu"><a href="https://sjevelazco.github.io/flexsdm/reference/tune_gbm.html">tune_gbm</a></span><span class="op">(</span>            </span>
+<span>    data <span class="op">=</span> <span class="va">occ_sp_filt_psa_part_data</span>,</span>
+<span>    response <span class="op">=</span> <span class="st">"pr_ab"</span>,</span>
+<span>    predictors <span class="op">=</span> <span class="va">var_ca_sel_names</span>,</span>
+<span>    partition <span class="op">=</span> <span class="st">".part"</span>,</span>
+<span>    grid <span class="op">=</span> <span class="va">tune_gbm_hyper</span>,</span>
+<span>    thr <span class="op">=</span> <span class="st">"max_sorensen"</span>,</span>
+<span>    metric <span class="op">=</span> <span class="st">"SORENSEN"</span>,</span>
+<span>    n_cores <span class="op">=</span> <span class="va">n_cores</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">models_fitted</span><span class="op">$</span><span class="va">gbm</span> <span class="op">&lt;-</span> <span class="va">tune_gbm</span></span>
+<span></span>
+<span><span class="co">#### max -----</span></span>
+<span><span class="va">tune_max_hyper</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/expand.grid.html">expand.grid</a></span><span class="op">(</span></span>
+<span>    regmult <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">.5</span>, <span class="fl">5</span>, <span class="fl">.5</span><span class="op">)</span>,</span>
+<span>    classes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"l"</span>, <span class="st">"lq"</span>, <span class="st">"h"</span>, <span class="st">"lqh"</span>, <span class="st">"lqhp"</span>, <span class="st">"lqhpt"</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">tune_max</span> <span class="op">&lt;-</span> <span class="fu">flexsdm</span><span class="fu">::</span><span class="fu"><a href="https://sjevelazco.github.io/flexsdm/reference/tune_max.html">tune_max</a></span><span class="op">(</span>            </span>
+<span>    data <span class="op">=</span> <span class="va">occ_sp_filt_psa_part_data</span>,</span>
+<span>    response <span class="op">=</span> <span class="st">"pr_ab"</span>,</span>
+<span>    predictors <span class="op">=</span> <span class="va">var_ca_sel_names</span>,</span>
+<span>    partition <span class="op">=</span> <span class="st">".part"</span>,</span>
+<span>    background <span class="op">=</span> <span class="va">bg_part_data</span>,</span>
+<span>    grid <span class="op">=</span> <span class="va">tune_max_hyper</span>,</span>
+<span>    thr <span class="op">=</span> <span class="st">"max_sorensen"</span>,</span>
+<span>    metric <span class="op">=</span> <span class="st">"SORENSEN"</span>,</span>
+<span>    n_cores <span class="op">=</span> <span class="va">n_cores</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">models_fitted</span><span class="op">$</span><span class="va">max</span> <span class="op">&lt;-</span> <span class="va">tune_max</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section><section id="avaliação-dos-modelos" class="level3" data-number="24.4.8"><h3 data-number="24.4.8" class="anchored" data-anchor-id="avaliação-dos-modelos">
+<span class="header-section-number">24.4.8</span> Avaliação dos modelos</h3>
+<p>Vamos agora avaliar a qualidade desses modelos.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb41"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">#### model performance ----</span></span>
+<span><span class="va">model_performance</span> <span class="op">&lt;-</span> <span class="fu">flexsdm</span><span class="fu">::</span><span class="fu"><a href="https://sjevelazco.github.io/flexsdm/reference/sdm_summarize.html">sdm_summarize</a></span><span class="op">(</span><span class="va">models_fitted</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rspatial.github.io/terra/reference/headtail.html">head</a></span><span class="op">(</span><span class="va">model_performance</span><span class="op">)</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 4 × 39
+  model_ID model threshold    thr_value n_presences n_absences TPR_mean  TPR_sd
+     &lt;int&gt; &lt;chr&gt; &lt;chr&gt;            &lt;dbl&gt;       &lt;int&gt;      &lt;int&gt;    &lt;dbl&gt;   &lt;dbl&gt;
+1        1 gam   max_sorensen     0.424          44         44    0.887 0.138  
+2        2 gau   max_sorensen     0.297          44         44    0.932 0.00275
+3        3 gbm   max_sorensen     0.567          44         44    0.956 0.0385 
+4        4 max   max_sorensen     0.234          44         44    0.978 0.0385 
+# ℹ 31 more variables: TNR_mean &lt;dbl&gt;, TNR_sd &lt;dbl&gt;, W_TPR_TNR_mean &lt;dbl&gt;,
+#   W_TPR_TNR_sd &lt;dbl&gt;, SORENSEN_mean &lt;dbl&gt;, SORENSEN_sd &lt;dbl&gt;,
+#   JACCARD_mean &lt;dbl&gt;, JACCARD_sd &lt;dbl&gt;, FPB_mean &lt;dbl&gt;, FPB_sd &lt;dbl&gt;,
+#   OR_mean &lt;dbl&gt;, OR_sd &lt;dbl&gt;, TSS_mean &lt;dbl&gt;, TSS_sd &lt;dbl&gt;, KAPPA_mean &lt;dbl&gt;,
+#   KAPPA_sd &lt;dbl&gt;, MCC_mean &lt;dbl&gt;, MCC_sd &lt;dbl&gt;, AUC_mean &lt;dbl&gt;, AUC_sd &lt;dbl&gt;,
+#   BOYCE_mean &lt;dbl&gt;, BOYCE_sd &lt;dbl&gt;, CRPS_mean &lt;dbl&gt;, CRPS_sd &lt;dbl&gt;,
+#   IMAE_mean &lt;dbl&gt;, IMAE_sd &lt;dbl&gt;, n.trees &lt;dbl&gt;, shrinkage &lt;dbl&gt;, …</code></pre>
+</div>
+</div>
+</section><section id="respostas-e-contribuição-das-variáveis-dos-modelos" class="level3" data-number="24.4.9"><h3 data-number="24.4.9" class="anchored" data-anchor-id="respostas-e-contribuição-das-variáveis-dos-modelos">
+<span class="header-section-number">24.4.9</span> Respostas e contribuição das variáveis dos modelos</h3>
+<p>Vamos calcular as respostas dos modelos em função das variáveis.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb43"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">#### variable response ----</span></span>
+<span><span class="fu">flexsdm</span><span class="fu">::</span><span class="fu"><a href="https://sjevelazco.github.io/flexsdm/reference/p_pdp.html">p_pdp</a></span><span class="op">(</span></span>
+<span>        model <span class="op">=</span> <span class="va">models_fitted</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">model</span>, </span>
+<span>        training_data <span class="op">=</span> <span class="va">occ_sp_filt_psa_part_data</span>, </span>
+<span>        colorl <span class="op">=</span> <span class="st">"red"</span>, </span>
+<span>        resid <span class="op">=</span> <span class="cn">TRUE</span>, </span>
+<span>        colorp <span class="op">=</span> <span class="st">"gray"</span>, </span>
+<span>        alpha <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>        theme <span class="op">=</span> <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span>base_size <span class="op">=</span> <span class="fl">10</span><span class="op">)</span><span class="op">)</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="cap24_files/figure-html/unnamed-chunk-22-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb44"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">flexsdm</span><span class="fu">::</span><span class="fu"><a href="https://sjevelazco.github.io/flexsdm/reference/p_pdp.html">p_pdp</a></span><span class="op">(</span></span>
+<span>        model <span class="op">=</span> <span class="va">models_fitted</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">model</span>, </span>
+<span>        training_data <span class="op">=</span> <span class="va">occ_sp_filt_psa_part_data</span>, </span>
+<span>        colorl <span class="op">=</span> <span class="st">"red"</span>, </span>
+<span>        resid <span class="op">=</span> <span class="cn">TRUE</span>, </span>
+<span>        colorp <span class="op">=</span> <span class="st">"gray"</span>, </span>
+<span>        alpha <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>        theme <span class="op">=</span> <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span>base_size <span class="op">=</span> <span class="fl">10</span><span class="op">)</span><span class="op">)</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="cap24_files/figure-html/unnamed-chunk-22-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb45"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">flexsdm</span><span class="fu">::</span><span class="fu"><a href="https://sjevelazco.github.io/flexsdm/reference/p_pdp.html">p_pdp</a></span><span class="op">(</span></span>
+<span>        model <span class="op">=</span> <span class="va">models_fitted</span><span class="op">[[</span><span class="fl">3</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">model</span>, </span>
+<span>        training_data <span class="op">=</span> <span class="va">occ_sp_filt_psa_part_data</span>, </span>
+<span>        colorl <span class="op">=</span> <span class="st">"red"</span>, </span>
+<span>        resid <span class="op">=</span> <span class="cn">TRUE</span>, </span>
+<span>        colorp <span class="op">=</span> <span class="st">"gray"</span>, </span>
+<span>        alpha <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>        theme <span class="op">=</span> <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span>base_size <span class="op">=</span> <span class="fl">10</span><span class="op">)</span><span class="op">)</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="cap24_files/figure-html/unnamed-chunk-22-3.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb46"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">flexsdm</span><span class="fu">::</span><span class="fu"><a href="https://sjevelazco.github.io/flexsdm/reference/p_pdp.html">p_pdp</a></span><span class="op">(</span></span>
+<span>        model <span class="op">=</span> <span class="va">models_fitted</span><span class="op">[[</span><span class="fl">4</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">model</span>, </span>
+<span>        training_data <span class="op">=</span> <span class="va">occ_sp_filt_psa_part_data</span>, </span>
+<span>        colorl <span class="op">=</span> <span class="st">"red"</span>, </span>
+<span>        resid <span class="op">=</span> <span class="cn">TRUE</span>, </span>
+<span>        colorp <span class="op">=</span> <span class="st">"gray"</span>, </span>
+<span>        alpha <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>        theme <span class="op">=</span> <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span>base_size <span class="op">=</span> <span class="fl">10</span><span class="op">)</span><span class="op">)</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="cap24_files/figure-html/unnamed-chunk-22-4.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Vamos calcular a contribuição das variáveis. Isso pode demorar um pouco.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb47"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">#### variable importance ----</span></span>
+<span><span class="va">models_fitted_no_names</span> <span class="op">&lt;-</span> <span class="va">models_fitted</span></span>
+<span><span class="fu"><a href="https://rspatial.github.io/terra/reference/names.html">names</a></span><span class="op">(</span><span class="va">models_fitted_no_names</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="cn">NULL</span></span>
+<span></span>
+<span><span class="va">var_imp_data</span> <span class="op">&lt;-</span> <span class="fu">flexsdm</span><span class="fu">::</span><span class="fu"><a href="https://sjevelazco.github.io/flexsdm/reference/sdm_varimp.html">sdm_varimp</a></span><span class="op">(</span></span>
+<span>    data <span class="op">=</span> <span class="va">occ_sp_filt_psa_part_data</span>,</span>
+<span>    response <span class="op">=</span> <span class="st">"pr_ab"</span>,</span>
+<span>    predictors <span class="op">=</span> <span class="va">var_ca_sel_names</span>,</span>
+<span>    models <span class="op">=</span> <span class="va">models_fitted_no_names</span>,</span>
+<span>    thr <span class="op">=</span> <span class="st">"max_sorensen"</span>,</span>
+<span>    n_sim <span class="op">=</span> <span class="fl">99</span>,</span>
+<span>    clamp <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>    n_cores <span class="op">=</span> <span class="va">n_cores</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>    <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html">pivot_longer</a></span><span class="op">(</span>cols <span class="op">=</span> <span class="va">TPR</span><span class="op">:</span><span class="va">IMAE</span>, names_to <span class="op">=</span> <span class="st">"metric"</span>, values_to <span class="op">=</span> <span class="st">"value"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>    <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">threshold</span> <span class="op">==</span> <span class="st">"max_sorensen"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>    <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">metric</span> <span class="op"><a href="https://rspatial.github.io/terra/reference/match.html">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"AUC"</span>, <span class="st">"TSS"</span>, <span class="st">"SORENSEN"</span>, <span class="st">"BOYCE"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>    <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>metric <span class="op">=</span> <span class="fu">forcats</span><span class="fu">::</span><span class="fu"><a href="https://forcats.tidyverse.org/reference/fct_relevel.html">fct_relevel</a></span><span class="op">(</span><span class="va">metric</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"AUC"</span>, <span class="st">"TSS"</span>, <span class="st">"SORENSEN"</span>, <span class="st">"BOYCE"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">var_imp_data_mean_sd</span> <span class="op">&lt;-</span> <span class="va">var_imp_data</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>    <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">predictors</span>, <span class="va">metric</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>    <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>value_mean <span class="op">=</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/summarize-generics.html">mean</a></span><span class="op">(</span><span class="va">value</span><span class="op">)</span>,</span>
+<span>                     value_sd <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">value</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">var_imp_data_mean_sd</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/reorder.factor.html">reorder</a></span><span class="op">(</span><span class="va">predictors</span>, <span class="va">value_mean</span><span class="op">)</span>, y <span class="op">=</span> <span class="va">value_mean</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_col</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="st">"gray"</span>, show.legend <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_linerange.html">geom_errorbar</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>ymin <span class="op">=</span> <span class="va">value_mean</span> <span class="op">-</span> <span class="va">value_sd</span>, </span>
+<span>                      ymax <span class="op">=</span> <span class="va">value_mean</span> <span class="op">+</span> <span class="va">value_sd</span><span class="op">)</span>,</span>
+<span>                  width <span class="op">=</span> <span class="fl">.2</span>, linewidth <span class="op">=</span> <span class="fl">.2</span>, color <span class="op">=</span> <span class="st">"black"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_text.html">geom_text</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">var_imp_data_mean_sd</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>label <span class="op">=</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/math-generics.html">round</a></span><span class="op">(</span><span class="va">value_mean</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span>, size <span class="op">=</span> <span class="fl">3</span>, hjust <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap</a></span><span class="op">(</span><span class="op">~</span><span class="va">metric</span>, scales <span class="op">=</span> <span class="st">"free_x"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Predictors"</span>, y <span class="op">=</span> <span class="st">"Variable importance"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/coord_flip.html">coord_flip</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span>base_size <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="cap24_files/figure-html/unnamed-chunk-23-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section><section id="consenso" class="level3" data-number="24.4.10"><h3 data-number="24.4.10" class="anchored" data-anchor-id="consenso">
+<span class="header-section-number">24.4.10</span> Consenso</h3>
+<p>Agora podemos fazer um consenso (<em>ensemble</em>) dos modelos.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb48"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">### ensemble ----</span></span>
+<span><span class="va">ens_m</span> <span class="op">&lt;-</span> <span class="fu">flexsdm</span><span class="fu">::</span><span class="fu"><a href="https://sjevelazco.github.io/flexsdm/reference/fit_ensemble.html">fit_ensemble</a></span><span class="op">(</span></span>
+<span>    models <span class="op">=</span> <span class="va">models_fitted</span>,</span>
+<span>    ens_method <span class="op">=</span> <span class="st">"meanw"</span>,</span>
+<span>    thr <span class="op">=</span> <span class="st">"max_sorensen"</span>,</span>
+<span>    thr_model <span class="op">=</span> <span class="st">"max_sorensen"</span>,</span>
+<span>    metric <span class="op">=</span> <span class="st">"SORENSEN"</span><span class="op">)</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+  |                                                                            
+  |                                                                      |   0%
+  |                                                                            
+  |======================================================================| 100%</code></pre>
+</div>
+</div>
+<p>Agora partimos para a parte final, que a predição espacial do consenso. Primeiro, fazermos a predição de cada algoritmo.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb50"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># empty raster</span></span>
+<span><span class="va">predict_ind</span> <span class="op">&lt;-</span> <span class="fu">terra</span><span class="fu">::</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/rast.html">rast</a></span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># methods ----</span></span>
+<span><span class="kw">for</span><span class="op">(</span><span class="va">m</span> <span class="kw">in</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/names.html">names</a></span><span class="op">(</span><span class="va">models_fitted</span><span class="op">)</span><span class="op">)</span><span class="op">{</span></span>
+<span>        </span>
+<span>        <span class="va">predict_ind_i</span> <span class="op">&lt;-</span> <span class="fu">flexsdm</span><span class="fu">::</span><span class="fu"><a href="https://sjevelazco.github.io/flexsdm/reference/sdm_predict.html">sdm_predict</a></span><span class="op">(</span></span>
+<span>            models <span class="op">=</span> <span class="va">models_fitted</span><span class="op">[[</span><span class="va">m</span><span class="op">]</span><span class="op">]</span>,</span>
+<span>            pred <span class="op">=</span> <span class="va">var_ca_sel</span>,</span>
+<span>            nchunk <span class="op">=</span> <span class="va">n_cores</span>,</span>
+<span>            thr <span class="op">=</span> <span class="st">"max_sorensen"</span>,</span>
+<span>            con_thr <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span>        <span class="va">predict_ind_i</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/math-generics.html">round</a></span><span class="op">(</span><span class="va">predict_ind_i</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span>, <span class="fl">3</span><span class="op">)</span></span>
+<span>        </span>
+<span>        <span class="va">predict_ind</span><span class="op">[[</span><span class="va">m</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">predict_ind_i</span></span>
+<span>        </span>
+<span><span class="op">}</span></span>
+<span><span class="va">predict_ind</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>class       : SpatRaster 
+size        : 960, 622, 4  (nrow, ncol, nlyr)
+resolution  : 0.05, 0.05  (x, y)
+extent      : -61.3, -30.2, -38.25, 9.75  (xmin, xmax, ymin, ymax)
+coord. ref. : lon/lat WGS 84 (CRS84) (OGC:CRS84) 
+source(s)   : memory
+names       : gam,   gau,   gbm, max 
+min values  :   0, 0.000, 0.000,   0 
+max values  :   1, 0.972, 0.939,   1 
+time        : 2000-01-01 UTC </code></pre>
+</div>
+</div>
+</section><section id="predição" class="level3" data-number="24.4.11"><h3 data-number="24.4.11" class="anchored" data-anchor-id="predição">
+<span class="header-section-number">24.4.11</span> Predição</h3>
+<p>Agora sim, podemos fazer a predição do consenso.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb52"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">##### ensemble ----</span></span>
+<span><span class="va">predict_ensemble</span> <span class="op">&lt;-</span> <span class="fu">flexsdm</span><span class="fu">::</span><span class="fu"><a href="https://sjevelazco.github.io/flexsdm/reference/sdm_predict.html">sdm_predict</a></span><span class="op">(</span></span>
+<span>    models <span class="op">=</span> <span class="va">ens_m</span>,</span>
+<span>    pred <span class="op">=</span> <span class="va">var_ca_sel</span>,</span>
+<span>    nchunk <span class="op">=</span> <span class="va">n_cores</span>,</span>
+<span>    thr <span class="op">=</span> <span class="st">"max_sorensen"</span>,</span>
+<span>    con_thr <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">predict_ensemble</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/math-generics.html">round</a></span><span class="op">(</span><span class="va">predict_ensemble</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span>, <span class="fl">3</span><span class="op">)</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>E por fim, fazemos os mapas das predições. Primeiro dos modelos individuais.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb53"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># maps ----</span></span>
+<span><span class="fu"><a href="https://r-tmap.github.io/tmap/reference/tm_shape.html">tm_shape</a></span><span class="op">(</span><span class="va">brazil_buffer</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://r-tmap.github.io/tmap/reference/tm_polygons.html">tm_borders</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://r-tmap.github.io/tmap/reference/tm_shape.html">tm_shape</a></span><span class="op">(</span><span class="va">brazil</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://r-tmap.github.io/tmap/reference/tm_polygons.html">tm_fill</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://r-tmap.github.io/tmap/reference/tm_shape.html">tm_shape</a></span><span class="op">(</span><span class="va">predict_ind</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://r-tmap.github.io/tmap/reference/tm_raster.html">tm_raster</a></span><span class="op">(</span>col.legend <span class="op">=</span> <span class="fu"><a href="https://r-tmap.github.io/tmap/reference/tm_legend.html">tm_legend</a></span><span class="op">(</span>show <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>,</span>
+<span>              col.scale <span class="op">=</span> <span class="fu"><a href="https://r-tmap.github.io/tmap/reference/tm_scale_continuous.html">tm_scale_continuous</a></span><span class="op">(</span>values <span class="op">=</span> <span class="st">"-brewer.spectral"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://r-tmap.github.io/tmap/reference/tm_facets.html">tm_facets</a></span><span class="op">(</span>nrow <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://r-tmap.github.io/tmap/reference/tm_shape.html">tm_shape</a></span><span class="op">(</span><span class="va">ca</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://r-tmap.github.io/tmap/reference/tm_polygons.html">tm_borders</a></span><span class="op">(</span>col <span class="op">=</span> <span class="st">"black"</span><span class="op">)</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="cap24_files/figure-html/unnamed-chunk-27-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>E agora, a predição do consenso.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb54"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># maps ----</span></span>
+<span><span class="fu"><a href="https://r-tmap.github.io/tmap/reference/tm_shape.html">tm_shape</a></span><span class="op">(</span><span class="va">brazil_buffer</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://r-tmap.github.io/tmap/reference/tm_polygons.html">tm_borders</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://r-tmap.github.io/tmap/reference/tm_shape.html">tm_shape</a></span><span class="op">(</span><span class="va">brazil</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://r-tmap.github.io/tmap/reference/tm_polygons.html">tm_fill</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://r-tmap.github.io/tmap/reference/tm_shape.html">tm_shape</a></span><span class="op">(</span><span class="va">predict_ensemble</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://r-tmap.github.io/tmap/reference/tm_raster.html">tm_raster</a></span><span class="op">(</span>col.legend <span class="op">=</span> <span class="fu"><a href="https://r-tmap.github.io/tmap/reference/tm_legend.html">tm_legend</a></span><span class="op">(</span>show <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>,</span>
+<span>              col.scale <span class="op">=</span> <span class="fu"><a href="https://r-tmap.github.io/tmap/reference/tm_scale_continuous.html">tm_scale_continuous</a></span><span class="op">(</span>values <span class="op">=</span> <span class="st">"-brewer.spectral"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://r-tmap.github.io/tmap/reference/tm_shape.html">tm_shape</a></span><span class="op">(</span><span class="va">ca</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://r-tmap.github.io/tmap/reference/tm_polygons.html">tm_borders</a></span><span class="op">(</span>col <span class="op">=</span> <span class="st">"black"</span><span class="op">)</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="cap24_files/figure-html/unnamed-chunk-28-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
 
 
-
-
-
-</main> <!-- /main -->
-<script id="quarto-html-after-body" type="application/javascript">
+</section></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";
     const anchorJS = new window.AnchorJS();
@@ -418,13 +1394,14 @@ ul.task-list li input[type="checkbox"] {
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-        const codeEl = trigger.previousElementSibling.cloneNode(true);
-        for (const childEl of codeEl.children) {
-          if (isCodeAnnotation(childEl)) {
-            childEl.remove();
-          }
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
         }
-        return codeEl.innerText;
+      }
+      return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy
@@ -765,9 +1742,7 @@ ul.task-list li input[type="checkbox"] {
       }
     }
   });
-  </script>
-<nav class="page-navigation">
-  <div class="nav-page nav-page-previous">
+  </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
       <a href="./cap23.html" class="pagination-link" aria-label="Sensoriamento remoto">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Sensoriamento remoto</span></span>
       </a>          
@@ -776,8 +1751,7 @@ ul.task-list li input[type="checkbox"] {
   </div>
 </nav>
 </div> <!-- /content -->
-<footer class="footer">
-  <div class="nav-footer">
+<footer class="footer"><div class="nav-footer">
     <div class="nav-footer-left">
 <p>Modelagem de Distribuição de Espécies no R foi escrito por Maurício H. Vancine.</p>
 </div>   
@@ -789,8 +1763,6 @@ ul.task-list li input[type="checkbox"] {
 </div>
   </div>
 </footer>
-
-
 
 
 </body></html>
