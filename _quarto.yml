@@ -9,7 +9,8 @@ book:
 
   page-footer:
     left: |
-      Modelagem de Distribuição de Espécies no R foi escrito por Maurício H. Vancine.
+      Modelagem de Distribuição de Espécies no R foi escrito por 
+      Maurício H. Vancine, Mario M. Moura e Santiago J.E. Velazco.
     right: |
       Este livro foi feito com [Quarto](https://quarto.org){target="_blank"}.
   cover-image: cover.png
@@ -61,6 +62,8 @@ book:
        - cap22.qmd
        - cap23.qmd
        - cap24.qmd
+       
+    - references.qmd
 
 bibliography: references.bib
 
@@ -71,12 +74,13 @@ format:
       - book-sdm-r.scss
     code-link: true
     
-    author-meta: "Maurício H. Vancine"
+    author-meta: "Maurício H. Vancine, Mario M. Moura e Santiago J. E. Velazco"
     callout-appearance: simple
 
 execute: 
   warning: false 
   message: false
+  eval: true
 
 editor: source
 
